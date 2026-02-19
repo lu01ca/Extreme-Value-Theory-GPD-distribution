@@ -11,7 +11,7 @@ Unlike simplified models that assume independent and identically distributed (i.
 
 ### From GEV to GPD
 The foundation of EVT relies on the **Generalized Extreme Value (GEV)** distribution, which models block maxima and is defined as:
-$$G(z) = \exp\left\{-\left[1 + \xi \left(\frac{z-\mu}{\sigma}\right)\right]^{-1/\xi}\right\}$$
+$$G(z) = \exp\left\{ -\left[ 1 + \xi \left( \frac{z-\mu}{\sigma} \right) \right]^{-1/\xi} \right\}$$
 However, the GEV approach wastes data by only considering maximums over large blocks. The **POT approach** improves efficiency by modeling all exceedances above a sufficiently high threshold $u$. Asymptotically, these exceedances follow a **Generalized Pareto Distribution (GPD)**:
 $$H(y) = 1 - \left(1 + \frac{\xi y}{\tilde{\sigma}}\right)^{-1/\xi}$$
 where $y = (x - u) > 0$ are the threshold excesses, and $\tilde{\sigma} = \sigma + \xi(u-\mu)$ is the scale parameter.
