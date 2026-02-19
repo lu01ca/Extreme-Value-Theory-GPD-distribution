@@ -39,7 +39,7 @@ The core of the analysis involves the following steps implemented in R for each 
 2.  **Parameter Estimation**: Fitting the GPD using **Maximum Likelihood Estimation (MLE)** to determine the shape ($\xi$) and scale ($\sigma$) parameters.
 3.  **Model Diagnostics**: Verification of the goodness-of-fit through **Probability Plots**, **Quantile Plots**, **Density Plots**, and **Return Level Plots** to estimate $N$-year return periods.
 
-![Diagnostic Plots](link-to-your-imag[diagnostica.pdf](https://github.com/user-attachments/files/25427687/diagnostica.pdf)
+[diagnostica.pdf](https://github.com/user-attachments/files/25427764/diagnostica.pdf)
 
 ## Application & Results: Return Levels for Extreme Cold
 The model successfully estimated return levels ($\hat{z}_T$) for extreme cold events across different return periods ($T$), adjusted for temporal dependency ($\theta$) and computed using the Delta Method for 95% Confidence Intervals.
