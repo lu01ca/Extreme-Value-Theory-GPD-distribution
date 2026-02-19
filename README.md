@@ -1,9 +1,11 @@
 # Extreme Value Theory: GPD Modeling for Non-Stationary & Dependent Data
 
 ## Overview
-This project explores **Extreme Value Theory (EVT)**, specifically the **Peaks Over Threshold (POT)** approach, to model the tail behavior of minimum daily temperature in Milan (1973-2024). 
+This project explores **Extreme Value Theory (EVT)**, specifically the **Peaks Over Threshold (POT)** approach, to model the tail behavior of **daily minimum temperatures** in Milan (1973-2024). 
 
 Unlike simplified models that assume independent and identically distributed (i.i.d.) data, this analysis focuses on the rigorous statistical validation required for **non-stationary** and **serially dependent** environmental data, ensuring that the theoretical assumptions for the Generalized Pareto Distribution (GPD) are strictly met.
+
+*Note: Since standard EVT models maxima, the dataset was transformed using $X' = -X$ to analyze extreme minima (extreme cold events). Return levels were then re-transformed to their original scale.*
 
 ## Theoretical Background
 
@@ -21,13 +23,13 @@ The shape parameter $\xi$ is crucial as it dictates the behavior of the distribu
 * **$\xi = 0$:** Light, exponential tail.
 
 ## Statistical Pre-processing
-Environmental data like daily minimum temperature rarely satisfy the i.i.d. assumption. Before fitting the GPD, the data underwent a comprehensive diagnostic and transformation phase:
+Environmental data like daily minimum temperatures rarely satisfy the i.i.d. assumption. Before fitting the GPD, the data underwent a comprehensive diagnostic and transformation phase:
 
 ### 1. Handling Non-Stationarity (Seasonality)
 Initial time-series plotting and formal testing using the **Augmented Dickey-Fuller (ADF) Test** revealed significant seasonal non-stationarity. To obtain identically distributed subsets, the dataset was split into **four meteorological seasons** (Winter, Spring, Summer, Autumn). Each season was modeled independently to capture specific atmospheric tail behaviors.
 
 ### 2. Handling Dependency (Declustering)
-temperature exhibit strong serial correlation (e.g., a temperature day is often followed by another). Since EVT requires independent exceedances, a **Declustering** technique using the *Runs Method* was applied. 
+Temperatures exhibit strong serial correlation (e.g., a cold day is often followed by another cold day). Since EVT requires independent exceedances, a **Declustering** technique using the *Runs Method* was applied. 
 This method filters the data by grouping consecutive exceedances into clusters, separated by a run length of $r$ consecutive observations below the threshold $u$. Only the maximum value of each cluster is extracted, ensuring the independence assumption for the GPD is valid.
 
 ## Modeling Methodology
@@ -37,11 +39,29 @@ The core of the analysis involves the following steps implemented in R for each 
 2.  **Parameter Estimation**: Fitting the GPD using **Maximum Likelihood Estimation (MLE)** to determine the shape ($\xi$) and scale ($\sigma$) parameters.
 3.  **Model Diagnostics**: Verification of the goodness-of-fit through **Probability Plots**, **Quantile Plots**, **Density Plots**, and **Return Level Plots** to estimate $N$-year return periods.
 
-## Application & Results
-*(Note: Insert here a brief summary of your results. Example: "The analysis revealed that Winter exhibits a heavier tail ($\xi > 0$) compared to Summer ($\xi < 0$), indicating a higher risk of extreme wind gusts during the colder months.")*
+## Application & Results: Return Levels for Extreme Cold
+The model successfully estimated return levels ($\hat{z}_T$) for extreme cold events across different return periods ($T$), adjusted for temporal dependency ($\theta$) and computed using the Delta Method for 95% Confidence Intervals.
+
+| Season | $T$ (years) | $\hat{z}_T$ (°C) | 95% CI |
+| :--- | :--- | :--- | :--- |
+| **DJF (Winter)** | 10 | -11.3 | [-12.6, -10.1] |
+| | 50 | -14.6 | [-16.5, -12.7] |
+| | 100 | -16.0 | [-18.2, -13.8] |
+| **MAM (Spring)** | 10 | -4.3 | [-5.4, -3.3] |
+| | 50 | -6.8 | [-8.4, -5.1] |
+| | 100 | -7.8 | [-9.8, -5.9] |
+| **JJA (Summer)** | 10 | +7.4 | [+6.3, +8.5] |
+| | 100 | +3.3 | [+1.4, +5.3] |
+| **SON (Autumn)** | 10 | -4.8 | [-5.4, -4.2] |
+| | 100 | -6.2 | [-7.1, -5.2] |
+
+### Key Insights
+* **Winter (DJF):** Exhibits the most severe extremes. The 100-year return level of -16.0°C is highly consistent with the historical record of Milan Linate (-14.4°C in Jan 1985).
+* **Autumn (SON):** The narrow gap between $T=10$ (-4.8°C) and $T=100$ (-6.2°C) is a direct consequence of a bounded upper tail ($\xi < 0$), reflecting that autumn temperatures do not reach winter extremes.
+* **Spring (MAM):** While less intense than winter, a 100-year event of -7.8°C represents an exceptional thermal anomaly compared to the seasonal average.
 
 ![Diagnostic Plots](link-to-your-image.png)
-*(Note: Add an image of your `gpd.diag` output or `mrlplot` here)*
+*(Note: Replace `link-to-your-image.png` with the actual path to your `gpd.diag` output or `mrlplot`)*
 
 ## Repository Structure
 * `Latex.R`: Complete R script including EDA, stationarity/dependency tests, declustering, and model fitting.
@@ -53,6 +73,3 @@ The analysis was performed in R and requires the following libraries:
 library(ismev)   # Extreme value modeling
 library(evd)     # Extreme value distributions functions
 library(tseries) # For ADF Test
-```
-## References & License
-Methodology Reference: Coles, S. (2001). An Introduction to Statistical Modeling of Extreme Values. Springer.
