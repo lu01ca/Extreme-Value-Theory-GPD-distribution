@@ -53,3 +53,6 @@ The analysis was performed in R and requires the following libraries:
 library(ismev)   # Extreme value modeling
 library(evd)     # Extreme value distributions functions
 library(tseries) # For ADF Test
+```
+## References & License
+Methodology Reference: Coles, S. (2001). An Introduction to Statistical Modeling of Extreme Values. Springer.
