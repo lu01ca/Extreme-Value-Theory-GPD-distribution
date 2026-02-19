@@ -37,7 +37,7 @@ The core of the analysis involves the following steps implemented in R for each 
 
 1.  **Threshold Selection ($u$)**: Utilization of the **Mean Residual Life Plot** (`mrlplot`) to identify the optimal threshold where the mean excess becomes linear.
 2.  **Parameter Estimation**: Fitting the GPD using **Maximum Likelihood Estimation (MLE)** to determine the shape ($\xi$) and scale ($\sigma$) parameters.
-3.  **Model Diagnostics**: Verification of the goodness-of-fit through **Probability Plots**, **Quantile Plots**, **Density Plots**, and **Return Level Plots** to estimate $N$-year return periods.
+3.  **Model Diagnostics**: Verification of the goodness-of-fit through **Probability Plots** and **Quantile Plots** for each season.
 
 <img width="540" height="540" alt="diagnostica" src="https://github.com/user-attachments/assets/5edf9c08-f927-499c-92b0-f2595b66b524" />
 
