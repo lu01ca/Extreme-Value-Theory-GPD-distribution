@@ -39,32 +39,38 @@ The core of the analysis involves the following steps implemented in R for each 
 2.  **Parameter Estimation**: Fitting the GPD using **Maximum Likelihood Estimation (MLE)** to determine the shape ($\xi$) and scale ($\sigma$) parameters.
 3.  **Model Diagnostics**: Verification of the goodness-of-fit through **Probability Plots**, **Quantile Plots**, **Density Plots**, and **Return Level Plots** to estimate $N$-year return periods.
 
+![Diagnostic Plots](link-to-your-imag[diagnostica.pdf](https://github.com/user-attachments/files/25427687/diagnostica.pdf)
+
 ## Application & Results: Return Levels for Extreme Cold
 The model successfully estimated return levels ($\hat{z}_T$) for extreme cold events across different return periods ($T$), adjusted for temporal dependency ($\theta$) and computed using the Delta Method for 95% Confidence Intervals.
 
 | Season | $T$ (years) | $\hat{z}_T$ (°C) | 95% CI |
 | :--- | :--- | :--- | :--- |
 | **DJF (Winter)** | 10 | -11.3 | [-12.6, -10.1] |
+| | 20 | -12.8 | [-14.3, -11.2] |
 | | 50 | -14.6 | [-16.5, -12.7] |
 | | 100 | -16.0 | [-18.2, -13.8] |
 | **MAM (Spring)** | 10 | -4.3 | [-5.4, -3.3] |
+| | 20 | -5.4 | [-6.7, -4.1] |
 | | 50 | -6.8 | [-8.4, -5.1] |
 | | 100 | -7.8 | [-9.8, -5.9] |
 | **JJA (Summer)** | 10 | +7.4 | [+6.3, +8.5] |
+| | 20 | +6.2 | [+4.8, +7.5] |
+| | 50 | +4.6 | [+2.8, +6.3] |
 | | 100 | +3.3 | [+1.4, +5.3] |
 | **SON (Autumn)** | 10 | -4.8 | [-5.4, -4.2] |
+| | 20 | -5.4 | [-6.0, -4.7] |
+| | 50 | -5.9 | [-6.7, -5.1] |
 | | 100 | -6.2 | [-7.1, -5.2] |
 
 ### Key Insights
 * **Winter (DJF):** Exhibits the most severe extremes. The 100-year return level of -16.0°C is highly consistent with the historical record of Milan Linate (-14.4°C in Jan 1985).
-* **Autumn (SON):** The narrow gap between $T=10$ (-4.8°C) and $T=100$ (-6.2°C) is a direct consequence of a bounded upper tail ($\xi < 0$), reflecting that autumn temperatures do not reach winter extremes.
 * **Spring (MAM):** While less intense than winter, a 100-year event of -7.8°C represents an exceptional thermal anomaly compared to the seasonal average.
-
-![Diagnostic Plots](link-to-your-image.png)
-*(Note: Replace `link-to-your-image.png` with the actual path to your `gpd.diag` output or `mrlplot`)*
+* **Summer (JJA):** Return levels remain positive even for $T=100$ years (+3.3°C). While statistically correct, this has a limited physical interpretation: these are not "extreme cold" events in the traditional sense, but rather unusually cool nights for the summer period.
+* **Autumn (SON):** The narrow gap between $T=10$ (-4.8°C) and $T=100$ (-6.2°C) is a direct consequence of a bounded upper tail ($\xi < 0$), reflecting that autumn temperatures, while dropping below zero, do not reach the extreme lows typical of winter.
 
 ## Repository Structure
-* `Latex.R`: Complete R script including EDA, stationarity/dependency tests, declustering, and model fitting.
+* `code.R`: Complete R script including EDA, stationarity/dependency tests, declustering, and model fitting.
 * `EVT_Pareto_generalizzata.pdf`: Detailed technical report (in Italian) covering the mathematical framework, proofs, and numerical results.
 
 ## Requirements & Environment
